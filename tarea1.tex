@@ -99,6 +99,14 @@
     obtenga un algoritmo para encontrar un n\'ucleo en una digr\'afica
     ac\'iclica.   ?`Qu\'e complejidad tiene su algoritmo?
 
+    Por inducción sobre $|V|$. Para $|V|=1$ es claro que se cumple, pues el conjunto $V$ es un núcleo y además es el único.
+
+    Ahora, supongamos que para cualquier digráfica acícilica que cumpla $|V|=k$, tiene un único núcleo. Sea $D$ una digráfica con $|V|=k+1$, luego, por ser acícilica, $D$ tiene una fuente, denotémosla $v$. Veamos que $D'=D-v$ es una digráfica acícilica de $k$ vértices, por lo tanto tiene un único núcleo $N'$.
+
+    Si $N^+(v)\cap N'\neq\emptyset$, entonces $N'$ es un conjunto independiente que absorbe a todo vértice de $D$, por lo tanto es un núcleo de $D$; mientras que por otro lado, si por otro lado $N^+(v)\cap N'=\emptyset$, entonces ningún exvecino de $v$ está en $N'$, y por ser una fuente de $D$, no tiene ningún invecino, de aquí se concluye que $N=N'\cup\set{v}$ es un conjunto independiente, y como $N'$ absorbe a todo vértice distinto de $v$, entonces $N$ es un núcleo de $D$.
+
+    Por lo tanto $D$ tiene un núcleo, ahora veamos que es único. Sea $N_0$ un núcleo cualquiera de $D$, ahora consideremos $N_0-\set{v}$, como $N_0$ absorbe todos los vértices de $D$ y ya que $v$ no tiene invecinos (es decir, ningún vértice es absorbido por él), se tiene que $N_0-\set{v}$ es un núcleo de $D-v$. Pero por hipótesis de inducción éste núcleo era único era único, entonces $N'=N_0-\set{v}$, finalmente, se puede deducir si $v$ es un elemento de $N_0$ usando los mismos argumentos que usamos para construir $N$, y de ésta forma el núcleo de $D$ es único.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%FALTA EL ALGORITMO%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \item Demuestre que cualquier digr\'afica con al menos dos n\'ucleos
     contiene un ciclo par.
 
