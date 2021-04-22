@@ -110,6 +110,14 @@
   \item Demuestre que cualquier digr\'afica con al menos dos n\'ucleos
     contiene un ciclo par.
 
+    Sea $D$ una digráfica con dos núcleos distintos $N_1,N_2$, definamos $K_1=N_1-N_2$, $K_2=N_2-N_1$, luego, $K=K_1\cup K_2$, notemos que como los núcleos son diferentes, entonces $K\neq\emptyset$. Consideremos $D'=D[K]$.
+
+    Sea $v\in K$, podemos considerar, sin pérdida de la generalidad $v\in K_1$, luego, como $v\notin N_2$ por éste segundo ser un núcleo debe existir $w\in N_2$ tal que $(v,w)\in A_D$, y por ésta adyacencia, se tiene que $w\notin N_1$, por lo tanto $w\in N_2-N_1=K_2\subset K$, es decir $w\in K$.
+
+    De aquí se tiene que $\forall v\in K$ existe $w\in K$ tal que $(v,w)\in A(D)$, es decir $\forall v\in K (d^+_{D'}(v)\leq 1)$, por lo tanto $D'$ tiene un ciclo. Y como $K=K_1\cup K_2$ si observamos que $K_1$ y $K_2$ son conjuntos independientes y ajenos, entonces ésta es una bipartición de $D'$. Por lo tanto el ciclo debe ser par.
+
+    Como $D'$ es una subdigráfica inducida, entonces $D$ tiene un ciclo par.
+
   \item Sea $D$ una digr\'afica fuertemente conexa y sea $k > 1$ un entero.
     Demuestre que si todos los ciclos de $D$ tienen longitud congruente a
     $0$ m\'odulo $k$, entonces $V$ admite una partici\'on $V = (V_0, \dots,
