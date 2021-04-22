@@ -88,6 +88,12 @@
   \item Demuestre que si $D$ es una digr\'afica, entonces su
     condensaci\'on $D^\ast$ es ac\'iclica.
 
+    Por contradicción, suponga que $D$ es una digráfica, $D^\ast$ su condensación y $C=(C_0,\dots,C_{n-1},C_0)$ un ciclo de ésta última, observemos que $C_i$ es una componente fuertemente conexa de $D$. Sea $i\in[n-1]$ y consideremos las componentes $C_i,C_{i+1 mod n}$, que existen porque $D^\ast$ no tiene lazos, estas son componentes fuertes distintas.
+
+    Veamos que, ya que $(C_i, C_{i+1 modn})\in A(D^\ast)$, por definición se tiene que existe $v_i\in C_i, w_i\in C_{i+1 modn}$ tales que $(v_i,w_i)\in A(D)$. Entonces, si consideramos $u\in C_i$, se tiene que por estar en la misma componente fuertemente conexa que $v_i$, entonces existe una $uv_i$-trayectoria "$P$", y de forma análoga, para todo $u'\in C_{i+1 modn}$ existe una $w_iu'$-trayectoria "$P'$"; de ésto se concluye que $\forall i\in[n-1]\forall u\in C_i \forall u'\in C_{i+1 modn}$ existe una $uu'$-trayectoria, a saber $uPv_iw_iP'u'$.
+
+  En síntesis, cualquier vértice de una componente fuertemente conexa en el ciclo $C$ puede alcanzar, en $D$, a todo vértice de la siguiente componente en $C$. Pero, por la naturaleza cíclica de $C$, esto implica que todo vértice de una componente $C_i$, puede alcanzar a todo vértice de otra componente $C_j$, lo que implica que todas estas componentes son la misma, lo que es una contradicción.
+
   \item Demuestre que si $D$ es una digr\'afica ac\'iclica, entonces
     tiene un \'unico n\'ucleo.   Adem\'as, a partir de su demostraci\'on
     obtenga un algoritmo para encontrar un n\'ucleo en una digr\'afica
@@ -115,9 +121,9 @@
   \item Para cada entero $k \ge 2$ exhiba una gr\'afica bipartita cuyo
     n\'umero crom\'atico por listas sea al menos $k$.
 
-  \item Demuestre que la digr\'afica de la Figura \ref{fig:choose} tiene
+  \item Demuestre que la digr\'afica de la Figura tiene
     n\'umero crom\'atico por listas igual a $3$.
-    \label{eje:choose}
+    %\label{eje:choose}
     \begin{figure}[ht!]
     \centering
     \begin{tikzpicture}
@@ -133,8 +139,9 @@
         \draw [edge] (\u) to (\v);
     \end{scope}
     \end{tikzpicture}
-    \caption{Gr\'afica para el Ejercicio \ref{eje:choose}.}
-    \label{fig:choose}
+    \caption{Gr\'afica para el Ejercicio.}
+    %\label{fig:choose}
     \end{figure}
 \end{enumerate}
+
 \end{document}
