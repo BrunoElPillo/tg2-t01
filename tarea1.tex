@@ -85,60 +85,58 @@
 \begin{document}
 
 \begin{enumerate}
-  \item Demuestre que si $D$ es una digr\'afica, entonces su
-    condensaci\'on $D^\ast$ es ac\'iclica.
+  \item \textbf{Demuestre que si $D$ es una digr\'afica, entonces su
+    condensaci\'on $D^\ast$ es ac\'iclica.}
 
-    Por contradicción, suponga que $D$ es una digráfica, $D^\ast$ su condensación y $C=(C_0,\dots,C_{n-1},C_0)$ un ciclo de ésta última, observemos que $C_i$ es una componente fuertemente conexa de $D$. Sea $i\in[n-1]$ y consideremos las componentes $C_i,C_{i+1 mod n}$, que existen porque $D^\ast$ no tiene lazos, estas son componentes fuertes distintas.
+    Por contradicción, suponga que $D$ es una digráfica, $D^\ast$ su condensación y $C=(C_0,\dots,C_{n-1},C_0)$ un ciclo en ella.. Sea $i\in[n-1]$ y consideremos las componentes $C_i,C_{i+1 mod n}$, ya que $D^\ast$ no tiene lazos, estas son componentes fuertes distintas.
 
-    Veamos que, ya que $(C_i, C_{i+1 modn})\in A(D^\ast)$, por definición se tiene que existe $v_i\in C_i, w_i\in C_{i+1 modn}$ tales que $(v_i,w_i)\in A(D)$. Entonces, si consideramos $u\in C_i$, se tiene que por estar en la misma componente fuertemente conexa que $v_i$, entonces existe una $uv_i$-trayectoria "$P$", y de forma análoga, para todo $u'\in C_{i+1 modn}$ existe una $w_iu'$-trayectoria "$P'$"; de ésto se concluye que $\forall i\in[n-1]\forall u\in C_i \forall u'\in C_{i+1 modn}$ existe una $uu'$-trayectoria, a saber $uPv_iw_iP'u'$.
+    Veamos que como $(C_i, C_{i+1 modn})\in A(D^\ast)$, por definición de la condensación aseguramos que existe $v_i\in C_i, w_i\in C_{i+1 modn}$ tales que $(v_i,w_i)\in A(D)$. Luego, para cualquier $u\in C_i$, se tiene que por estar en la misma componente fuertemente conexa que $v_i$, entonces existe una $uv_i$-trayectoria ``$P$'', y de forma análoga, para todo $u'\in C_{i+1 modn}$ existe una $w_iu'$-trayectoria ``$P'$''; de ésto se concluye que $\forall i\in[n-1]\forall u\in C_i \forall u'\in C_{i+1 modn}$ existe una $uu'$-trayectoria, a saber $uPv_iw_iP'u'$.
 
-  En síntesis, cualquier vértice de una componente fuertemente conexa en el ciclo $C$ puede alcanzar, en $D$, a todo vértice de la siguiente componente en $C$. Pero, por la naturaleza cíclica de $C$, esto implica que todo vértice de una componente $C_i$, puede alcanzar a todo vértice de otra componente $C_j$, lo que implica que todas estas componentes son la misma, lo que es una contradicción.
+  En síntesis, cualquier vértice de una componente fuertemente conexa en el ciclo $C$ puede alcanzar, en $D$, a todo vértice de la siguiente componente en $C$. Pero, por la naturaleza cíclica de $C$, esto implica que todo vértice de una componente $C_i$, puede alcanzar a todo vértice de otra componente $C_j$, con lo que concluímos que la gráfica inducida por la unión $\cup_{i=1}^nC_i$ es fuertemente conexa, lo que es una contradicción al hecho de que $C$ fuera un ciclo.
 
-  \item Demuestre que si $D$ es una digr\'afica ac\'iclica, entonces
+  \item \textbf{Demuestre que si $D$ es una digr\'afica ac\'iclica, entonces
     tiene un \'unico n\'ucleo.   Adem\'as, a partir de su demostraci\'on
     obtenga un algoritmo para encontrar un n\'ucleo en una digr\'afica
-    ac\'iclica.   ?`Qu\'e complejidad tiene su algoritmo?
+    ac\'iclica.   ?`Qu\'e complejidad tiene su algoritmo?}
 
     Por inducción sobre $|V|$. Para $|V|=1$ es claro que se cumple, pues el conjunto $V$ es un núcleo y además es el único.
 
     Ahora, supongamos que para cualquier digráfica acícilica que cumpla $|V|=k$, tiene un único núcleo. Sea $D$ una digráfica con $|V|=k+1$, luego, por ser acícilica, $D$ tiene una fuente, denotémosla $v$. Veamos que $D'=D-v$ es una digráfica acícilica de $k$ vértices, por lo tanto tiene un único núcleo $N'$.
 
-    Si $N^+(v)\cap N'\neq\emptyset$, entonces $N'$ es un conjunto independiente que absorbe a todo vértice de $D$, por lo tanto es un núcleo de $D$; mientras que por otro lado, si por otro lado $N^+(v)\cap N'=\emptyset$, entonces ningún exvecino de $v$ está en $N'$, y por ser una fuente de $D$, no tiene ningún invecino, de aquí se concluye que $N=N'\cup\set{v}$ es un conjunto independiente, y como $N'$ absorbe a todo vértice distinto de $v$, entonces $N$ es un núcleo de $D$.
+    Si $N^+(v)\cap N'\neq\emptyset$, entonces $N'$ es un conjunto independiente que absorbe a todo vértice de $D$, por lo tanto es un núcleo de $D$; si por otro lado $N^+(v)\cap N'=\emptyset$, entonces ningún exvecino de $v$ está en $N'$, y por ser una fuente de $D$, no tiene ningún invecino, de aquí se concluye que $N=N'\cup\set{v}$ es un conjunto independiente, y como $N'$ absorbe a todo vértice distinto de $v$, entonces $N$ es un núcleo de $D$.
 
-    Por lo tanto $D$ tiene un núcleo, ahora veamos que es único. Sea $N_0$ un núcleo cualquiera de $D$, ahora consideremos $N_0-\set{v}$, como $N_0$ absorbe todos los vértices de $D$ y ya que $v$ no tiene invecinos (es decir, ningún vértice es absorbido por él), se tiene que $N_0-\set{v}$ es un núcleo de $D-v$. Pero por hipótesis de inducción éste núcleo era único era único, entonces $N'=N_0-\set{v}$, finalmente, se puede deducir si $v$ es un elemento de $N_0$ usando los mismos argumentos que usamos para construir $N$, y de ésta forma el núcleo de $D$ es único.
+    Ahora veamos que es único, sea $N_0$ un núcleo cualquiera de $D$, ahora consideremos $N_0-\set{v}$, como $N_0$ absorbe todos los vértices de $D$ y ya que $v$ no tiene invecinos (es decir, ningún vértice es absorbido por él), se tiene que $N_0-\set{v}$ es un núcleo de $D-v$. Pero por hipótesis de inducción éste núcleo era único era único, entonces $N'=N_0-\set{v}$, finalmente, se puede deducir si $v$ es un elemento de $N_0$ usando los mismos argumentos que usamos para construir $N$, y de ésta forma el núcleo de $D$ es único.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%FALTA EL ALGORITMO%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \item Demuestre que cualquier digr\'afica con al menos dos n\'ucleos
-    contiene un ciclo par.
+  \item \textbf{Demuestre que cualquier digr\'afica con al menos dos n\'ucleos
+    contiene un ciclo par.}
 
     Sea $D$ una digráfica con dos núcleos distintos $N_1,N_2$, definamos $K_1=N_1-N_2$, $K_2=N_2-N_1$, luego, $K=K_1\cup K_2$, notemos que como los núcleos son diferentes, entonces $K\neq\emptyset$. Consideremos $D'=D[K]$.
 
     Sea $v\in K$, podemos considerar, sin pérdida de la generalidad $v\in K_1$, luego, como $v\notin N_2$ por éste segundo ser un núcleo debe existir $w\in N_2$ tal que $(v,w)\in A_D$, y por ésta adyacencia, se tiene que $w\notin N_1$, por lo tanto $w\in N_2-N_1=K_2\subset K$, es decir $w\in K$.
 
-    De aquí se tiene que $\forall v\in K$ existe $w\in K$ tal que $(v,w)\in A(D)$, es decir $\forall v\in K (d^+_{D'}(v)\leq 1)$, por lo tanto $D'$ tiene un ciclo. Y como $K=K_1\cup K_2$ si observamos que $K_1$ y $K_2$ son conjuntos independientes y ajenos, entonces ésta es una bipartición de $D'$. Por lo tanto el ciclo debe ser par.
+    De aquí se tiene que $\forall v\in K$ existe $w\in K$ tal que $(v,w)\in A(D)$, es decir $\forall v\in K (d^+_{D'}(v)\geq 1)$, por lo tanto $D'$ tiene un ciclo. Observemos que $K_1$ y $K_2$ son conjuntos independientes, ajenos, y tales que $K=K_1\cup K_2$, entonces ésta es una bipartición de $D'$. Por lo tanto el ciclo debe ser par. Como $D'$ es una subdigráfica inducida, entonces $D$ tiene un ciclo par.
 
-    Como $D'$ es una subdigráfica inducida, entonces $D$ tiene un ciclo par.
-
-  \item Sea $D$ una digr\'afica fuertemente conexa y sea $k > 1$ un entero.
+  \item \textbf{Sea $D$ una digr\'afica fuertemente conexa y sea $k > 1$ un entero.
     Demuestre que si todos los ciclos de $D$ tienen longitud congruente a
     $0$ m\'odulo $k$, entonces $V$ admite una partici\'on $V = (V_0, \dots,
     V_{k-1})$ de tal forma que si $(u,v) \in A$, entonces existe $i \in
     \{ 0, \dots, k-1 \}$ tal que $u \in V_i$ y $v \in V_{i+1}$ donde los
-    sub\'indices se toman m\'odulo $k$.
+    sub\'indices se toman m\'odulo $k$.}
 
-  \item Sea $D$ una digr\'afica infinita.  Demuestre que son equivalentes:
+  \item \textbf{Sea $D$ una digr\'afica infinita.  Demuestre que son equivalentes:}
     \begin{enumerate}
-      \item $D$ es n\'ucleo perfecta.
+      \item \textit{$D$ es n\'ucleo perfecta.}
 
-      \item Toda subdigr\'afica inducida de $D$ contiene un semin\'ucleo no
-        vac\'io.
+      \item \textit{Toda subdigr\'afica inducida de $D$ contiene un semin\'ucleo no
+        vac\'io.}
     \end{enumerate}
     (Sugerencia: Lema de Zorn.)
 
-  \item Para cada entero $k \ge 2$ exhiba una gr\'afica bipartita cuyo
-    n\'umero crom\'atico por listas sea al menos $k$.
+  \item \textbf{Para cada entero $k \ge 2$ exhiba una gr\'afica bipartita cuyo
+    n\'umero crom\'atico por listas sea al menos $k$.}
 
-  \item Demuestre que la digr\'afica de la Figura tiene
-    n\'umero crom\'atico por listas igual a $3$.
+  \item \textbf{Demuestre que la digr\'afica de la Figura tiene
+    n\'umero crom\'atico por listas igual a $3$.}
     %\label{eje:choose}
     \begin{figure}[ht!]
     \centering
