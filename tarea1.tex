@@ -5,6 +5,7 @@
 \usepackage{amsfonts}
 
 % Figuras
+\usepackage{algorithmic}
 \usepackage{graphicx}
 
 % Gráficas
@@ -106,7 +107,26 @@
     Si $N^+(v)\cap N'\neq\emptyset$, entonces $N'$ es un conjunto independiente que absorbe a todo vértice de $D$, por lo tanto es un núcleo de $D$; si por otro lado $N^+(v)\cap N'=\emptyset$, entonces ningún exvecino de $v$ está en $N'$, y por ser una fuente de $D$, no tiene ningún invecino, de aquí se concluye que $N=N'\cup\set{v}$ es un conjunto independiente, y como $N'$ absorbe a todo vértice distinto de $v$, entonces $N$ es un núcleo de $D$.
 
     Ahora veamos que es único, sea $N_0$ un núcleo cualquiera de $D$, ahora consideremos $N_0-\set{v}$, como $N_0$ absorbe todos los vértices de $D$ y ya que $v$ no tiene invecinos (es decir, ningún vértice es absorbido por él), se tiene que $N_0-\set{v}$ es un núcleo de $D-v$. Pero por hipótesis de inducción éste núcleo era único era único, entonces $N'=N_0-\set{v}$, finalmente, se puede deducir si $v$ es un elemento de $N_0$ usando los mismos argumentos que usamos para construir $N$, y de ésta forma el núcleo de $D$ es único.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%FALTA EL ALGORITMO%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+      \begin{algorithmic}[1]
+        \REQUIRE Una gráfica acíclica $G$, su conjutno de vértices $V$ y de flechas $A$.
+        \ENSURE$K$ el único núcleo de $G$
+        \WHILE {$V\neq\emptyset$}
+        \FOR {$v\in V$}
+        \IF {$v$ es un sumidero de $G$}
+        \STATE $K=K\cup\set{v}$
+        \STATE borramos a $v$ y a todos sus invecinos del conjunto de vértices $V$
+        \STATE $G=[V]$
+        \ENDIF
+        \ENDFOR
+        \ENDWHILE
+        \STATE \textbf{Return:} $K$
+      \end{algorithmic}
+
+      Éste algoritmo funciona porque el sumidero de una gráfica acíclica siempre debe estar en su núcleo, pues no puede ser absorbido por otro vértice. Luego borramos el sumidero junto con todos los vértices que absorbe, ésto nos deja con una gráfica conformada de vértices ajenos al conjunto $K$ y, al ser acíclica, podemos iterar el mismo procedimiento hasta borrar todos los vértices de la gráfica.
+
+      Notemos que las el ''if´´ de las lineas $3-7$ es de complejidad $O(1)$, por lo tanto, dado que el ''for´´ de la linea $2$ puede ser de complejidad hasta $O(V)$ y a su vez el ''while´´ de la linea $2$ puede repetirse, en el peor de los casos $V$-veces. Concluímos pues que el algoritmo tiene complejidad $O(V^2)$.
+
   \item \textbf{Demuestre que cualquier digr\'afica con al menos dos n\'ucleos
     contiene un ciclo par.}
 
@@ -130,11 +150,17 @@
       \item \textit{Toda subdigr\'afica inducida de $D$ contiene un semin\'ucleo no
         vac\'io.}
     \end{enumerate}
-    (Sugerencia: Lema de Zorn.)
+
+    Observemos que, como todo núcleo es un seminúcleo, si la gráfica es núcleo perfecta, esto significa, por definición que toda subdigráfica inducida tiene un núcleo lo que es suficiente para que se cumpla \textit{b)}.
+
+    Ahora, supongamos que toda digráfica inducida de $D$ contiene un seminúcleo no vacío. Sea $D_0$ una subdigráfica inducida de $D$, definimos $K$ el conjunto de seminúcleos no vacíos de $D_0$, en éste la contención induce un orden parcial, y si consideramos cualquier cadena de $K$, tiene una cota superior porque el conjunto es finito.
+
+    Así pues,
+
 
   \item \textbf{Para cada entero $k \ge 2$ exhiba una gr\'afica bipartita cuyo
     n\'umero crom\'atico por listas sea al menos $k$.}
-
+    \pagebreak
   \item \textbf{Demuestre que la digr\'afica de la Figura tiene
     n\'umero crom\'atico por listas igual a $3$.}
     %\label{eje:choose}
@@ -156,6 +182,53 @@
     \caption{Gr\'afica para el Ejercicio.}
     %\label{fig:choose}
     \end{figure}
+
+    Veamos que la gráfica anterior no es coloreable con listas de tamaño dos, el siguiente es un contraejemplo:
+
+  \begin{figure}[ht!]
+    \centering
+   \begin{tikzpicture}
+   \begin{scope}[scale=0.7]
+     \node (a) at (-1,2)  [vertex, label=180:{$\{1,2\}$}]{};
+     \node (b) at (-1,0)  [vertex, label=180:{$\{1,3\}$}]{};
+     \node (c) at (-1,-2) [vertex, label=180:{$\{2,3\}$}]{};
+     \node (x) at (1,2)   [vertex, label=0:{$\{2,3\}$}]{};
+     \node (y) at (1,0)   [vertex, label=0:{$\{1,3\}$}]{};
+     \node (z) at (1,-2)  [vertex, label=0:{$\{1,2\}$}]{};
+
+     \foreach \u/\v in {a/b,a/x,y/x,y/b,y/z,c/b,c/z}
+       \draw [edge] (\u) to (\v);
+     \end{scope}
+    \end{tikzpicture}
+  \end{figure}
+
+   Se puede ver que ésta asignación de listas es imposible de satisfacer suponiendo que el vértice superior izquiero recibe el color $1$ ó $2$, en ambos casos se llegan a conflictos en la coloración de otro vértice.
+
+   Ahora, veremos que cualquier asignación de $3$-listas funciona, considere las siguientes listas arbitrarias:
+
+   \begin{figure}[ht!]
+     \centering
+     \begin{tikzpicture}
+     \begin{scope}[scale=0.7]
+       \node (a) at (-1,2)  [vertex, label=180:{$\{a_1,b_1,c_1\}$}]{};
+       \node (b) at (-1,0)  [vertex, label=180:{$\{a_2,b_2,c_2\}$}]{};
+       \node (c) at (-1,-2) [vertex, label=180:{$\{a_3,b_3,c_3\}$}]{};
+       \node (x) at (1,2)   [vertex, label=0:{$\{a_4,b_4,c_4\}$}]{};
+       \node (y) at (1,0)   [vertex, label=0:{$\{a_5,b_5,c_5\}$}]{};
+       \node (z) at (1,-2)  [vertex, label=0:{$\{a_6,b_6,c_6\}$}]{};
+
+       \foreach \u/\v in {a/b,a/x,y/x,y/b,y/z,c/b,c/z}
+         \draw [edge] (\u) to (\v);
+     \end{scope}
+     \end{tikzpicture}
+   \end{figure}
+
+   Nos referiremos a los vértices como $v_1,v_2,v_3,v_4,v_5,v_6$ respectivamente en coherencia con los índices de las listas.
+
+   Veamos que si para $v_2$ se elige $a_2$, entonces los vértices $v_1,v_5,v_3$ seguro tienen colores disponibles en sus listas pues éstos conforman un conjunto independiente y por lo tanto su elección sólo estaría restringida a por $a_2$. Finalmente veamos que como $v_4$ y $v_6$ son adyacentes sólo a dos vértices, entonces seguro es posible elegir un color en sus listas que no cause conflictos.
+
+   Con ésto concluímos que ésta gráfica es $3$-coloreable por listas.
+
 \end{enumerate}
 
 \end{document}
